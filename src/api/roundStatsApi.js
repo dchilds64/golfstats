@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/rounds'
+const url = import.meta.env.VITE_BASE_API_URL
 
 export async function makeAddRoundCall(round) {
   const options = {
@@ -9,7 +9,7 @@ export async function makeAddRoundCall(round) {
     body: JSON.stringify(round)
   }
 
-  const response = await fetch(url, options)
+  const response = await fetch(url + '/rounds', options)
   if (!response.ok) {
     throw new Error('There was an issue.')
   }
@@ -26,7 +26,7 @@ export async function makeAddShotCall(shot) {
     body: JSON.stringify(shot)
   }
 
-  const response = await fetch(`${url}/${shot.roundId}/shots`, options)
+  const response = await fetch(`${url}/rounds/${shot.roundId}/shots`, options)
   if (!response.ok) {
     throw new Error('There was an issue.')
   }
